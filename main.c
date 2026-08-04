@@ -36,6 +36,8 @@ int main()
             break;
         case 3:
             return 0;
+        case 4:
+            Search_stu(students, count);
         default:
             printf("Wrong number");
             break;
