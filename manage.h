@@ -11,5 +11,5 @@ typedef struct Student{
 
 void Add_stu(STU *stu);
 void Show_stu(STU *students, int count);
-
+void Search_stu(STU *students, int count);
 #endif
