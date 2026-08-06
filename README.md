@@ -2,21 +2,19 @@
 
 C 언어로 구현한 콘솔 기반 학생 관리 시스템 프로젝트입니다.
 
-C 언어의 구조체(`struct`), 포인터, 배열, 함수 분리, 헤더 파일 관리 등을 학습하기 위해 제작했습니다.
-
-계산기 프로젝트 이후 실제 데이터를 저장하고 관리하는 프로그램을 만드는 것을 목표로 진행했습니다.
+구조체(`struct`), 포인터, 배열, 문자열 처리, 함수 분리, 헤더 파일 관리 등을 학습하기 위해 제작하고 있습니다.
 
 ---
 
-## Development Environment
+# Development Environment
 
-* Language: C
-* Compiler: GCC
-* Platform: OnlineGDB
+* Language : C
+* Compiler : GCC
+* Platform : OnlineGDB
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```text
 StudentManagement
@@ -27,32 +25,27 @@ StudentManagement
 └── README.md
 ```
 
-### main.c
+* **main.c**
 
-프로그램의 전체 흐름을 담당합니다.
+  * 프로그램 실행 및 메뉴 관리
+  * 사용자 입력 처리
+  * 학생 관리 함수 호출
 
-* 메뉴 출력
-* 사용자 입력 처리
-* 학생 관리 함수 호출
-* 프로그램 종료 관리
+* **manage.c**
 
-### manage.c
+  * 학생 데이터 처리
+  * CRUD 기능 구현
 
-학생 데이터 처리 기능을 구현합니다.
+* **manage.h**
 
-* 학생 추가
-* 학생 출력
-* 학생 검색
-
-### manage.h
-
-공통으로 사용하는 구조체와 함수 선언을 관리합니다.
+  * 구조체 정의
+  * 함수 선언
 
 ---
 
-## Data Structure
+# Data Structure
 
-학생 정보를 저장하기 위해 구조체를 사용했습니다.
+학생 정보를 하나의 구조체로 관리합니다.
 
 ```c
 typedef struct Student{
@@ -63,16 +56,7 @@ typedef struct Student{
 } STU;
 ```
 
-### Student Information
-
-| 변수    | 설명    |
-| ----- | ----- |
-| id    | 학생 번호 |
-| name  | 학생 이름 |
-| age   | 나이      |
-| score | 점수      |
-
-여러 학생을 관리하기 위해 구조체 배열을 사용했습니다.
+학생들은 구조체 배열에 저장됩니다.
 
 ```c
 STU students[100];
@@ -80,152 +64,162 @@ STU students[100];
 
 ---
 
-## Features
+# Implemented Features
 
-### 1. Add Student
+## 1. Add Student
 
 학생 정보를 입력받아 배열에 저장합니다.
 
-입력 정보:
+입력 항목
 
-* ID
+* Student ID
 * Name
 * Age
 * Score
 
-동작 과정:
-
-```text
-Add Student
-      ↓
-학생 정보 입력
-      ↓
-students[count] 저장
-      ↓
-count 증가
-```
-
 ---
 
-### 2. Show Students
+## 2. Show Students
 
-현재 저장된 모든 학생 정보를 출력합니다.
+현재 저장되어 있는 모든 학생 정보를 출력합니다.
 
-출력 예:
+출력 예시
 
 ```text
 ========== Student List ==========
 
 Student 1
 
-ID    : 20260001
-Name  : Kim
-Age   : 20
-Score : 95.5
-
-----------------------------------
+ID     : 20260001
+Name   : Kim
+Age    : 20
+Score  : 95.50
+-------------------------
 ```
+
+학생이 없는 경우
+
+```text
+No student data.
+```
+
+를 출력하도록 구현했습니다.
 
 ---
 
-### 3. Search Student
+## 3. Search Student
 
-학생 이름을 입력받아 해당 학생을 검색합니다.
+학생 이름을 입력받아 배열을 순회하며 검색합니다.
 
-검색 과정:
+검색 과정
 
 ```text
 이름 입력
-    ↓
-학생 배열 탐색
-    ↓
-strcmp()를 이용해 이름 비교
-    ↓
-일치하면 학생 정보 출력
+      ↓
+학생 배열 순회
+      ↓
+strcmp()로 문자열 비교
+      ↓
+학생 발견
 ```
+
+찾지 못한 경우
+
+```text
+Student not found.
+```
+
+을 출력합니다.
 
 ---
 
-## What I Learned
+## 4. Update Student
 
-### 1. Structure (`struct`)
+학생 ID를 입력받아 해당 학생 정보를 수정합니다.
 
-여러 데이터를 하나의 자료형으로 묶어 관리하는 방법을 배웠습니다.
+동작 과정
 
-```c
-typedef struct Student{
-    int id;
-    char name[30];
-    int age;
-    double score;
-} STU;
+```text
+ID 입력
+      ↓
+학생 검색
+      ↓
+현재 정보 출력
+      ↓
+이름 수정
+나이 수정
+점수 수정
+      ↓
+Update Complete!
 ```
 
-학생이라는 하나의 객체를 만들고 관리하는 방식에 대해 이해했습니다.
+이번 기능을 구현하면서 구조체 포인터를 이용하여 원본 데이터를 직접 수정하는 방법을 익혔습니다.
 
 ---
 
-### 2. Pointer with Structure
+## 5. Delete Student
 
-구조체를 함수에 전달하기 위해 구조체 포인터를 사용했습니다.
+학생 이름을 입력받아 해당 학생을 삭제합니다.
 
-예:
+삭제 과정
 
-```c
-void Add_stu(STU *stu);
+```text
+학생 검색
+      ↓
+뒤 학생들을 앞으로 이동
+      ↓
+삭제 완료
 ```
 
-포인터를 이용해 함수 내부에서 원본 구조체 데이터를 수정하는 방법을 학습했습니다.
+삭제 기능을 구현하면서 배열에서 데이터를 제거하는 방법과 데이터를 한 칸씩 이동시키는 원리를 학습했습니다.
 
 ---
 
-### 3. Array Management
+# What I Learned
 
-구조체 배열을 사용하여 여러 학생 데이터를 관리했습니다.
+이번 프로젝트를 진행하면서 다음 내용을 학습했습니다.
 
-```c
-STU students[100];
-```
-
-반복문을 통해 배열 내부 데이터를 탐색하고 출력하는 방법을 익혔습니다.
-
----
-
-### 4. String Handling
-
-C에서 문자열 비교는 `==`가 아닌 `strcmp()`를 사용해야 한다는 것을 배웠습니다.
-
-```c
-strcmp(students[i].name, name)
-```
+* 구조체(`struct`)를 이용한 데이터 관리
+* 구조체 배열 사용
+* 구조체 포인터(`->`) 사용
+* 함수 분리 및 코드 재사용
+* Header File 관리
+* 문자열 입력 및 `strcmp()` 사용
+* `strcpy()`를 이용한 문자열 복사
+* 반복문을 이용한 데이터 탐색
+* CRUD(Create / Read / Update / Delete) 구현
 
 ---
 
-## Current Version
+# Current Version
 
-### v0.1
+### v0.2
 
-Completed:
+Completed
 
-* [x] Student structure design
 * [x] Add Student
 * [x] Show Students
 * [x] Search Student
+* [x] Update Student
+* [x] Delete Student
 
 ---
 
-## Future Improvements
+# Next Goals
 
-추가 예정 기능:
+다음 버전에서 구현 예정
 
-* [ ] Update Student Information
-* [ ] Delete Student
-* [ ] Student Sorting
-* [ ] File Save / Load
-* [ ] Input Exception Handling
+* [ ] Delete 기능 개선 (학생 수 관리)
+* [ ] ID 중복 검사
+* [ ] 입력 예외 처리
+* [ ] 학생 정렬 (ID / 이름 / 점수)
+* [ ] 파일 저장 (Save)
+* [ ] 파일 불러오기 (Load)
 
 ---
 
-## Goal
+# Goal
 
-이 프로젝트를 통해 C 언어로 데이터를 관리하는 프로그램의 기본 구조를 이해하고, 이후 파일 처리와 보안 관련 프로젝트로 확장하는 것을 목표로 합니다.
+이 프로젝트의 목표는 C 언어를 이용하여 데이터를 관리하는 프로그램을 직접 구현하고, 구조체, 포인터, 배열, 파일 입출력을 익히는 것입니다.
+
+프로젝트를 완성한 후에는 파일 처리와 보안 개념을 활용한 다음 프로젝트(예: 비밀번호 관리 프로그램, 파일 암호화 프로그램)로 확장할 계획입니다.
