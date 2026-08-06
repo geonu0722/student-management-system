@@ -10,6 +10,9 @@ typedef struct Student{
 } STU;
 
 void Add_stu(STU *stu);
+void Print_stu(STU *stu);
 void Show_stu(STU *students, int count);
 void Search_stu(STU *students, int count);
+void Update_stu(STU *students, int count);
+void Delete_stu(STU *students, int count);
 #endif
